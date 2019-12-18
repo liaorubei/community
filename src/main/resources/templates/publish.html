@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>发布</title>
+</head>
+<body>
+<form action="/publish" method="post">
+    <label for="title">标题</label>
+    <input type="text" id="title" name="title" th:value="${title}">
+    <br/>
+    <label for="description">问题描述</label>
+    <textarea id="description" name="description" th:text="${description}"></textarea>
+    <br/>
+    <label for="tag">标签</label>
+    <input type="text" id="tag" name="tag" th:value="${tag}">
+    <br/>
+    <span th:text="${error}"></span>
+    <input type="submit" value="发布"/>
+</form>
+</body>
+</html>
