@@ -5,8 +5,14 @@ import lombok.Data;
 @Data
 public class User {
     private String id;
+
     private String username;
     private String password;
+
+    private String nickname;
+    private String realname;
+
+    private String avatar;
 
     public String getId() {
         return id;

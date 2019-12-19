@@ -10,10 +10,12 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
-    @Select("selectById * from User")
+    @Select("select * from User")
     List<User> getUsers();
 
+    @Select("select * from User where token=#{token}")
+    User getByToken(@Param("token") String token);
 
-    @Select("selectById * from User where token=#{token}")
-    User getUserByToken(@Param("token") String token);
+    @Select("select * from User where Id=#{id}")
+    User getById(String id);
 }

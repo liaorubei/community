@@ -53,7 +53,7 @@ public class QuestionController {
         if (null != cookies) {
             for (Cookie cookie : cookies) {
                 if ("token".equals(cookie.getName())) {
-                    user = userMapper.getUserByToken(cookie.getValue());
+                    user = userMapper.getByToken(cookie.getValue());
                     break;
                 }
             }
@@ -82,5 +82,10 @@ public class QuestionController {
 
 
         return "redirect:/";
+    }
+
+    @RequestMapping("/question")
+    public String kkkkkkkk() {
+        return "question";
     }
 }
