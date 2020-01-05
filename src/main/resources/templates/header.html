@@ -1,10 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<div class="aw-top-menu-wrap" th:fragment="copy" xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <!-- logo -->
+        <div class="aw-logo hidden-xs">
+            <a href="https://elasticsearch.cn">
+                <img src="https://elasticsearch.cn/static/css/default/img/logo.svg" style="width: 80px;height: 40px;">
+            </a>
+        </div>
+        <!-- end logo -->
+        <!-- 搜索框 -->
+        <div class="aw-search-box  hidden-xs hidden-sm">
+            <!-- 旧的搜索框 -->
+            <form class="navbar-search" action="https://elasticsearch.cn/search/" id="global_search_form" method="post">
+                <input class="form-control search-query" type="text" placeholder="搜索问题、话题或人" autocomplete="off" name="q" id="aw-search-query"/>
+                <span title="搜索" id="global_search_btns" onClick="$('#global_search_form').submit();"><i class="icon icon-search"></i></span>
+                <div class="aw-dropdown">
+                    <div class="mod-body">
+                        <p class="title">输入关键字进行搜索</p>
+                        <ul class="aw-dropdown-list hide"></ul>
+                        <p class="search"><span>搜索:</span><a onClick="$('#global_search_form').submit();"></a></p>
+                    </div>
+                    <div class="mod-footer">
+                        <a href="https://index.elasticsearch.cn/" target="_blank"><span style="color: red;margin-left: 10px;">New!</span>&nbsp;前往Elastic社区资源搜索！</a>
+                        <a href="https://elasticsearch.cn/publish" onClick="$('#header_publish').click();" class="pull-right btn btn-mini btn-success publish">发起问题</a>
+                    </div>
+                </div>
+            </form>
+            <!-- 旧的搜索框 -->
+        </div>
+        <!-- end 搜索框 -->
+        <!-- 导航 -->
+        <div class="aw-top-nav navbar">
+            <div class="navbar-header">
+                <button class="navbar-toggle pull-left" style="padding: 0px;margin-bottom: 0px; margin-top: 4px;margin-left: 4px;">
+                    <img src="https://elasticsearch.cn/static/css/default/img/logo.svg" style="width: 80px;height: 40px;">
+                </button>
+            </div>
+            <nav role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="https://elasticsearch.cn" class="active"><i class="icon icon-list"></i> 发现</a></li>
+                    <li><a href="https://elasticsearch.cn/slides/"><i class="icon icon-presentation"></i> 分享</a></li>
+                    <li><a href="https://elasticsearch.cn/article/" class=""><i class="icon icon-newspaper"></i> 文章</a></li>
+                    <li><a href="https://elasticsearch.cn/topic/"><i class="icon icon-topic"></i> 话题</a></li>
+                    <li><a href="https://elasticsearch.cn/event/"><i class="icon icon-date"></i> 活动</a></li>
+                    <li><a href="https://elasticsearch.cn/download/"><i class="icon icon-download"></i> 下载</a></li>
+                </ul>
+            </nav>
+        </div>
+        <!-- end 导航 -->
+
+        <div class="aw-user-nav">
+            <a class="login btn btn-small btn-primary" href="/login">登录</a>
+        </div>
+        <!-- 发起 -->
+
+        <!-- end 发起 -->
+    </div>
+</div>
