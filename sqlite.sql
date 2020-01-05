@@ -25,3 +25,16 @@ create table Question
   Tag          varchar(256),
   CONSTRAINT PK_Question PRIMARY KEY (Id)
 );
+
+drop table if exists Comment;
+create table Comment
+(
+  Id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  Content    VARCHAR(1024),
+  QuestionId VARCHAR(32),
+  ParentId   INTEGER,
+  CreateBy   VARCHAR(32),
+  CreateAt   DATETIME,
+  ModifyAt   DATETIME,
+  LikeCount  INTEGER
+);
