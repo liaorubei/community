@@ -19,8 +19,9 @@ public class Comment {
     private Integer id;
     @TableField("Content")
     private String content;
-
+    @TableField("QuestionId")
     private String questionId;
+    @TableField("ParentId")
     private String parentId;
     private String createBy;
     private Date createAt;

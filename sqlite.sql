@@ -9,8 +9,6 @@ create table User
   CONSTRAINT PK_User primary key (Id)
 );
 
-
-
 create table Question
 (
   Id           varchar(32),
@@ -37,4 +35,14 @@ create table Comment
   CreateAt   DATETIME,
   ModifyAt   DATETIME,
   LikeCount  INTEGER
+);
+
+drop table if exists Goods;
+create table Goods(
+    Id TEXT,
+    Title TEXT,
+    Price REAL,
+    Url TEXT,
+    Image TEXT,
+    Thumb INTEGER
 );

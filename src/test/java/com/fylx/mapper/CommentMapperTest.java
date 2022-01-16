@@ -22,6 +22,7 @@ public class CommentMapperTest {
         entity.setContent("test");
         entity.setParentId("1");
         entity.setQuestionId("1");
+        entity.setCreateBy("by me");
         int insert = commentMapper.insert(entity);
         // commentMapper.in
         assertEquals(1, insert);

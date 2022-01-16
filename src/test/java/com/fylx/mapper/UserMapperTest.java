@@ -27,10 +27,18 @@ public class UserMapperTest {
     @Test
     public void InsertUserTest() {
         User user = new User();
-        user.setId(UUID.randomUUID().toString().replace("-", ""));
+        String id = UUID.randomUUID().toString().replace("-", "");
+        user.setId(id);
         user.setUsername("admin");
         user.setPassword("123456");
         int insert = userMapper.insert(user);
         Assert.assertEquals(1, insert);
+
+        //删除
+        int i = userMapper.deleteById(id);
+
+        //验证
+        User user1 = userMapper.selectById(id);
+        Assert.assertNull(user1);
     }
 }
