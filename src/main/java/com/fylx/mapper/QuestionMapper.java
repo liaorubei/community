@@ -18,4 +18,7 @@ public interface QuestionMapper {
 
     @Select("select * from Question")
     List<Question> list();
+
+    @Select("select * from Question where CreateBy=#{userId}")
+    List<Question> getByUserId(String userId);
 }

@@ -1,5 +1,6 @@
 package com.fylx.ctrl;
 
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.fylx.Result;
 import com.fylx.dto.CommentDto;
 import com.fylx.entity.Comment;
@@ -19,6 +20,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -48,7 +50,6 @@ public class QuestionController {
             HttpServletRequest request,
             Model model) {
 
-
         //数据回填
         model.addAttribute("title", title);
         model.addAttribute("description", description);
@@ -72,7 +73,6 @@ public class QuestionController {
             return "publish";
         }
 
-
         Question question = new Question();
         question.setId(UUID.randomUUID().toString().replace("-", ""));
         question.setTitle(title);
@@ -92,9 +92,28 @@ public class QuestionController {
         return "redirect:/";
     }
 
-    @RequestMapping("/question")
-    public String kkkkkkkk() {
-        return "question";
+    @ResponseBody
+    @RequestMapping("/get")
+    public Result<List<Question>> getQuestions(
+            @RequestParam String userId) {
+        Result<List<Question>> result = new Result<>();
+        try {
+            result.setCode(200);
+            result.setDesc("查询成功");
+            if (StringUtils.isNotBlank(userId)) {
+                result.setData(this.questionMapper.getByUserId(userId));
+            } else {
+                result.setData(this.questionMapper.list());
+            }
+        } catch (Exception ex) {
+            result.setCode(201);
+            result.setDesc(ex.getMessage());
+        }
+        return result;
+    }
+
+    public Result getQuestions() {
+        return null;
     }
 
     @ResponseBody

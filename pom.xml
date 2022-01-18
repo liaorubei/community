@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.15.RELEASE</version>
+        <version>2.1.5.RELEASE</version>
     </parent>
 
     <groupId>com.fylx</groupId>
@@ -64,9 +64,9 @@
         </dependency>
     </dependencies>
     <build>
-        <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+<!--        <pluginManagement>&lt;!&ndash; lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) &ndash;&gt;
             <plugins>
-<!--                <plugin>
+                <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>3.1.0</version>
                 </plugin>
@@ -102,14 +102,13 @@
                     <artifactId>maven-project-info-reports-plugin</artifactId>
                     <version>3.0.0</version>
                 </plugin>
-                -->
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>2.1.15.RELEASE</version>
-                    <!--          <configuration>
+                    &lt;!&ndash;          <configuration>
                                   <mainClass>com.fylx.App</mainClass>
-                              </configuration>-->
+                              </configuration>&ndash;&gt;
                     <executions>
                         <execution>
                             <goals>
@@ -119,6 +118,19 @@
                     </executions>
                 </plugin>
             </plugins>
-        </pluginManagement>
+        </pluginManagement>-->
+        <plugins>
+
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+        </plugins>
     </build>
+    <repositories>
+        <repository>
+            <id>https://maven.aliyun.com/repository/public</id>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </repository>
+    </repositories>
 </project>

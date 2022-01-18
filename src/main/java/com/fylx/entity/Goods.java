@@ -15,6 +15,7 @@ public class Goods {
 
     private String title;
     private Double price;
+    private Boolean isTop;
     private String url;
     private String image;
     private Integer thumb;
