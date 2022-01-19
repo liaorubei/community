@@ -18,4 +18,7 @@ public interface UserMapper extends BaseMapper<User> {
 
     @Select("select * from User where Id=#{id}")
     User getById(String id);
+
+    @Select("select * from User where Id in(select UserId from GroupsUser where GroupId=#{groupId})")
+    List<User> getByGroupId(String groupId);
 }

@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/question")
+@RequestMapping("/questions")
 public class QuestionController {
     @Autowired
     private UserMapper userMapper;
@@ -93,18 +93,13 @@ public class QuestionController {
     }
 
     @ResponseBody
-    @RequestMapping("/get")
-    public Result<List<Question>> getQuestions(
-            @RequestParam String userId) {
+    @GetMapping
+    public Result<List<Question>> GetAll() {
         Result<List<Question>> result = new Result<>();
         try {
             result.setCode(200);
             result.setDesc("查询成功");
-            if (StringUtils.isNotBlank(userId)) {
-                result.setData(this.questionMapper.getByUserId(userId));
-            } else {
-                result.setData(this.questionMapper.list());
-            }
+            result.setData(questionMapper.list());
         } catch (Exception ex) {
             result.setCode(201);
             result.setDesc(ex.getMessage());
@@ -112,8 +107,20 @@ public class QuestionController {
         return result;
     }
 
-    public Result getQuestions() {
-        return null;
+    @ResponseBody
+    @GetMapping("/{id}")
+    public Result<Question> getOne(@PathVariable("id") String id) {
+        Result<Question> result = new Result<Question>();
+        try {
+            result.setCode(200);
+            result.setDesc("success");
+            Question data = questionMapper.selectById(id);
+            result.setData(data);
+        } catch (Exception ex) {
+            result.setCode(201);
+            result.setDesc(ex.getMessage());
+        }
+        return result;
     }
 
     @ResponseBody
@@ -135,5 +142,4 @@ public class QuestionController {
         }
         return result;
     }
-
 }

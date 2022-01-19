@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
 import java.util.UUID;
 
 import static org.junit.Assert.*;
@@ -15,7 +16,6 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserMapperTest {
-
     @Autowired
     UserMapper userMapper;
 
@@ -40,5 +40,12 @@ public class UserMapperTest {
         //验证
         User user1 = userMapper.selectById(id);
         Assert.assertNull(user1);
+    }
+
+    @Test
+    public void getByGroupId() {
+        List<User> users = userMapper.getByGroupId("1");
+        users.forEach(i -> System.out.println("username="+i.getUsername()));
+        Assert.assertTrue(users.size() > 0);
     }
 }
