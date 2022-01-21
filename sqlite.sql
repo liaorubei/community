@@ -43,6 +43,7 @@ create table Article
 (
     Id           TEXT,
     Title        TEXT,
+    Content TEXT,
     Description  TEXT,
     IsOriginal   INTEGER,
     Type         INTEGER ,
