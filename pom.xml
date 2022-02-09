@@ -82,6 +82,11 @@
             <artifactId>converter-moshi</artifactId>
             <version>2.9.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.android.tools.build</groupId>
+            <artifactId>gradle</artifactId>
+            <version>3.5.1</version>
+        </dependency>
     </dependencies>
     <build>
         <!--        <pluginManagement>&lt;!&ndash; lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) &ndash;&gt;
@@ -151,6 +156,10 @@
         <repository>
             <id>https://maven.aliyun.com/repository/public</id>
             <url>https://maven.aliyun.com/repository/public</url>
+        </repository>
+        <repository>
+            <id>https://maven.aliyun.com/repository/google</id>
+            <url>https://maven.aliyun.com/repository/google</url>
         </repository>
     </repositories>
 </project>
