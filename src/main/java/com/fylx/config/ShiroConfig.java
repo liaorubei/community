@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.HashMap;
 import java.util.Map;
 
-//@Configuration
+@Configuration
 public class ShiroConfig {
 
     @Bean
@@ -31,6 +31,7 @@ public class ShiroConfig {
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
     }
+
     @Bean
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
@@ -38,6 +39,7 @@ public class ShiroConfig {
         Map<String, String> map = new HashMap<>();
         map.put("/admin/logout", "logout");
         map.put("/swagger**/**", "anon");
+        map.put("/files/**", "anon");
         map.put("/api/**", "anon");
         map.put("/v2/**", "anon");
         map.put("/**", "authc");

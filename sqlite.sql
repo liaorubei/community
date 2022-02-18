@@ -18,6 +18,12 @@ create table User
     CONSTRAINT PK_User primary key (Id)
 );
 
+insert into User(id, username, password, nickname) values ('01','test01','123456','张三');
+insert into User(id, username, password, nickname) values ('02','test02','123456','李四');
+insert into User(id, username, password, nickname) values ('03','test03','123456','王五');
+insert into User(id, username, password, nickname) values ('04','test04','123456','赵六');
+insert into User(id, username, password, nickname) values ('05','test05','123456','田七');
+
 drop table if exists Groups;
 create table Groups
 (
@@ -30,6 +36,17 @@ create table Groups
     Avatar      TEXT,
     CONSTRAINT Pk_Groups primary key (Id)
 );
+
+insert into Groups(Id, Title, Description, Leader, CreateBy, CreateAt, Avatar) VALUES ('11','北京游泳小组','',null,null,null,null);
+insert into Groups(Id, Title, Description, Leader, CreateBy, CreateAt, Avatar) VALUES ('12','泰山旅游','',null,null,null,null);
+insert into Groups(Id, Title, Description, Leader, CreateBy, CreateAt, Avatar) VALUES ('13','凉水河游泳','',null,null,null,null);
+insert into Groups(Id, Title, Description, Leader, CreateBy, CreateAt, Avatar) VALUES ('14','路亚','',null,null,null,null);
+insert into Groups(Id, Title, Description, Leader, CreateBy, CreateAt, Avatar) VALUES ('15','晚间跑步','',null,null,null,null);
+insert into Groups(Id, Title, Description, Leader, CreateBy, CreateAt, Avatar) VALUES ('16','蜜友最不无聊无所不聊','',null,null,null,null);
+insert into Groups(Id, Title, Description, Leader, CreateBy, CreateAt, Avatar) VALUES ('17','乒乓球','',null,null,null,null);
+insert into Groups(Id, Title, Description, Leader, CreateBy, CreateAt, Avatar) VALUES ('18','王者荣耀开黑','',null,null,null,null);
+insert into Groups(Id, Title, Description, Leader, CreateBy, CreateAt, Avatar) VALUES ('19','羽毛球','',null,null,null,null);
+insert into Groups(Id, Title, Description, Leader, CreateBy, CreateAt, Avatar) VALUES ('20','滑旱冰','',null,null,null,null);
 
 drop table if exists GroupsUser;
 create table GroupsUser
@@ -161,3 +178,21 @@ insert into Goods(id, title, price, istop, url, image, thumb) values ('13','【5
 insert into Goods(id, title, price, istop, url, image, thumb) values ('14','防狼神器防卫女士用品防护户外喷洒雾',99.99,0,'https://item.m.jd.com/product/10021624770759.html',null,1);
 insert into Goods(id, title, price, istop, url, image, thumb) values ('15','110毫升 效果强劲',99.99,0,'https://item.m.jd.com/product/10021624770759.html',null,1);
 insert into Goods(id, title, price, istop, url, image, thumb) values ('16','尖叫报警器女防狼器女子自卫用品',99.99,0,'https://item.m.jd.com/product/10021624770759.html',null,1);
+
+drop table if exists Apk;
+create table Apk
+(
+    Id          TEXT    not null,
+    CreateAt    TEXT    not null,
+    VersionCode INTEGER not null,
+    VersionName TEXT,
+    Path        TEXT    not null,
+    IsRelease   INTEGER,
+    constraint Pk_Apk primary key (Id)
+);
+
+insert into Apk(id, createat, versioncode, versionname, path, isrelease) VALUES ('01','2020-12-12 12:12:12',1,'1','/apks/1.apk',1);
+insert into Apk(id, createat, versioncode, versionname, path, isrelease) VALUES ('02','2020-12-12 12:12:12',2,'1','/apks/1.apk',1);
+insert into Apk(id, createat, versioncode, versionname, path, isrelease) VALUES ('03','2020-12-12 12:12:12',3,'1','/apks/1.apk',1);
+insert into Apk(id, createat, versioncode, versionname, path, isrelease) VALUES ('04','2020-12-12 12:12:12',4,'1','/apks/1.apk',1);
+insert into Apk(id, createat, versioncode, versionname, path, isrelease) VALUES ('05','2020-12-12 12:12:12',5,'1','/apks/1.apk',1);
