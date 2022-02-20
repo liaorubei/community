@@ -39,7 +39,7 @@ public class ArticleController {
             if (type == null)
                 result.setData(articleMapper.selectList(Wrappers.lambdaQuery()));
             else {
-                result.setData(articleMapper.selectList(new QueryWrapper<Article>().eq("Type", type)));
+                result.setData(articleMapper.selectList(new QueryWrapper<Article>().eq("Type", type).orderByDesc("CreateAt")));
             }
         } catch (Exception ex) {
             result.setCode(201);
@@ -66,4 +66,6 @@ public class ArticleController {
         }
         return result;
     }
+
+
 }

@@ -15,7 +15,7 @@ import java.io.FileOutputStream;
 import java.util.List;
 
 @RestController
-@RequestMapping("/goods")
+@RequestMapping("/api/goods")
 public class GoodsController {
 
     @Value("${filepath}")

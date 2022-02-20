@@ -42,7 +42,10 @@ public class ShiroConfig {
         map.put("/files/**", "anon");
         map.put("/api/**", "anon");
         map.put("/v2/**", "anon");
-        map.put("/**", "authc");
+        //map.put("/**", "authc");
+        map.put("/admin/index", "authc");
+        map.put("/admin/goods/**", "authc");
+        map.put("/admin/articel/**", "authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
 
