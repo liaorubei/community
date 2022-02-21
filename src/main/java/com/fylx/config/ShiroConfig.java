@@ -45,7 +45,9 @@ public class ShiroConfig {
         //map.put("/**", "authc");
         map.put("/admin/index", "authc");
         map.put("/admin/goods/**", "authc");
-        map.put("/admin/articel/**", "authc");
+        map.put("/admin/article/**", "authc");
+        map.put("/admin/question/**", "authc");
+        map.put("/admin/group/**", "authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
 

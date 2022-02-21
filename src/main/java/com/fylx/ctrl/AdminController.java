@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -227,7 +229,7 @@ public class AdminController {
     }
 
     @GetMapping("/admin/group/edit/{id}")
-    public String groupEdit(String id, Model model) {
+    public String groupEdit(@PathVariable String id, Model model) {
         Group item = groupsMapper.selectById(id);
         model.addAttribute("modelItem", item);
         return "/admin/admin_group_edit.html";
@@ -235,7 +237,8 @@ public class AdminController {
 
     @ResponseBody
     @PostMapping("/admin/group/edit")
-    public AjaxResult groupEdit(Group group) {
+    public AjaxResult groupEdit(Group group, HttpServletRequest request, @RequestParam("file1") MultipartFile file) {
+        MultipartHttpServletRequest k = (MultipartHttpServletRequest) request;
         if (StringUtils.isEmpty(group.getId())) {
             group.setId(UUID.randomUUID().toString().replace("-", ""));
             groupsMapper.insert(group);
@@ -248,19 +251,20 @@ public class AdminController {
         //set result
         AjaxResult result = new AjaxResult();
         result.setStatusCode(200);
-        result.setNavTabId("");
+        result.setNavTabId("admin_group_index");
         result.setCallbackType("closeCurrent");
         return result;
     }
 
+    @ResponseBody
     @PostMapping("/admin/group/delete/{id}")
-    public AjaxResult groupDelete(String id) {
+    public AjaxResult groupDelete(@PathVariable String id) {
         //delete
         groupsMapper.deleteById(id);
 
         //set result
         AjaxResult result = new AjaxResult(200);
-        result.setNavTabId("");
+        result.setNavTabId("admin_group_index");
         return result;
     }
 
@@ -268,14 +272,14 @@ public class AdminController {
 
     @GetMapping("/admin/question")
     public String questionIndex(Model model) {
-        List<Article> list = articleMapper.selectList(null);
+        List<Article> list = articleMapper.selectList(new QueryWrapper<Article>().eq("Type", 3).orderByDesc("CreateAt"));
         model.addAttribute("modelItems", list);
         return "/admin/admin_question_index.html";
     }
 
     @PostMapping("/admin/question")
     public String questionIndex(Integer pageNum, Model model) {
-        List<Article    > list = articleMapper.selectList(null);
+        List<Article> list = articleMapper.selectList(new QueryWrapper<Article>().eq("Type", 3).orderByDesc("CreateAt"));
         model.addAttribute("modelItems", list);
         return "/admin/admin_question_index.html";
     }
@@ -288,7 +292,7 @@ public class AdminController {
     }
 
     @GetMapping("/admin/question/edit/{id}")
-    public String questionEdit(String id, Model model) {
+    public String questionEdit(@PathVariable String id, Model model) {
         Article item = articleMapper.selectById(id);
         model.addAttribute("modelItem", item);
         return "/admin/admin_question_edit.html";
@@ -296,8 +300,9 @@ public class AdminController {
 
     @ResponseBody
     @PostMapping("/admin/question/edit")
-    public AjaxResult questionEdit(Article article) {
+    public AjaxResult questionEdit(Article article, HttpServletRequest request) {
         article.setType(3);
+        article.setCreateAt(sdf.format(new Date()));
         if (StringUtils.isEmpty(article.getId())) {
             article.setId(UUID.randomUUID().toString().replace("-", ""));
             articleMapper.insert(article);
@@ -310,19 +315,20 @@ public class AdminController {
         //set result
         AjaxResult result = new AjaxResult();
         result.setStatusCode(200);
-        result.setNavTabId("");
+        result.setNavTabId("admin_question_index");
         result.setCallbackType("closeCurrent");
         return result;
     }
 
+    @ResponseBody
     @PostMapping("/admin/question/delete/{id}")
-    public AjaxResult questionDelete(String id) {
+    public AjaxResult questionDelete(@PathVariable String id) {
         //delete
         articleMapper.deleteById(id);
 
         //set result
         AjaxResult result = new AjaxResult(200);
-        result.setNavTabId("");
+        result.setNavTabId("admin_question_index");
         return result;
     }
 
