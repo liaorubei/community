@@ -74,7 +74,7 @@ create table Article
     LikeCount    INTEGER,
     Tag          TEXT,
     GroupId      TEXT,
-    CONSTRAINT PK_Question PRIMARY KEY (Id)
+    CONSTRAINT PK_Article PRIMARY KEY (Id)
 );
 
 delete from Article where  Id is not null;
@@ -144,7 +144,7 @@ insert into Question(id, title, description,  commentcount, viewcount, likecount
 drop table if exists Comment;
 create table Comment
 (
-    Id         INTEGER PRIMARY KEY AUTOINCREMENT not null,
+    Id         INTEGER primary key AUTOINCREMENT not null,
     Content    TEXT,
     QuestionId TEXT,
     ParentId   INTEGER,
@@ -152,6 +152,7 @@ create table Comment
     CreateAt   DATETIME,
     ModifyAt   DATETIME,
     LikeCount  INTEGER
+--,    constraint Pk_Comment primary key (Id)
 );
 
 drop table if exists Goods;
