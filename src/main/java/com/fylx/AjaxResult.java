@@ -11,6 +11,18 @@ public class AjaxResult {
     private String callbackType;
     private String forwardUrl;
 
+    public AjaxResult() {
+    }
+
+    /**
+     * 创建并同时设置状态码
+     *
+     * @param code 状态码
+     */
+    public AjaxResult(int code) {
+        this.statusCode = code;
+    }
+
     public Integer getStatusCode() {
         return statusCode;
     }

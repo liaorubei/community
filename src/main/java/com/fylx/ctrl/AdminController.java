@@ -3,11 +3,10 @@ package com.fylx.ctrl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.fylx.AjaxResult;
-import com.fylx.entity.Article;
-import com.fylx.entity.Goods;
-import com.fylx.entity.User;
+import com.fylx.entity.*;
 import com.fylx.mapper.ArticleMapper;
 import com.fylx.mapper.GoodsMapper;
+import com.fylx.mapper.GroupsMapper;
 import com.fylx.mapper.UserMapper;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -36,6 +35,9 @@ public class AdminController {
 
     @Autowired
     ArticleMapper articleMapper;
+
+    @Autowired
+    GroupsMapper groupsMapper;
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -200,6 +202,130 @@ public class AdminController {
         //ajax.setCallbackType("closeCurrent");
         return ajax;
     }
+
+    /*--------------group--------------*/
+
+    @GetMapping("/admin/group")
+    public String groupIndex(Model model) {
+        List<Group> list = groupsMapper.selectList(null);
+        model.addAttribute("modelItems", list);
+        return "/admin/admin_group_index.html";
+    }
+
+    @PostMapping("/admin/group")
+    public String groupIndex(Integer pageNum, Model model) {
+        List<Group> list = groupsMapper.selectList(null);
+        model.addAttribute("modelItems", list);
+        return "/admin/admin_group_index.html";
+    }
+
+    @GetMapping("/admin/group/edit")
+    public String groupEdit(Model model) {
+        Group item = new Group();
+        model.addAttribute("modelItem", item);
+        return "/admin/admin_group_edit.html";
+    }
+
+    @GetMapping("/admin/group/edit/{id}")
+    public String groupEdit(String id, Model model) {
+        Group item = groupsMapper.selectById(id);
+        model.addAttribute("modelItem", item);
+        return "/admin/admin_group_edit.html";
+    }
+
+    @ResponseBody
+    @PostMapping("/admin/group/edit")
+    public AjaxResult groupEdit(Group group) {
+        if (StringUtils.isEmpty(group.getId())) {
+            group.setId(UUID.randomUUID().toString().replace("-", ""));
+            groupsMapper.insert(group);
+        }
+        //update
+        else {
+            groupsMapper.updateById(group);
+        }
+
+        //set result
+        AjaxResult result = new AjaxResult();
+        result.setStatusCode(200);
+        result.setNavTabId("");
+        result.setCallbackType("closeCurrent");
+        return result;
+    }
+
+    @PostMapping("/admin/group/delete/{id}")
+    public AjaxResult groupDelete(String id) {
+        //delete
+        groupsMapper.deleteById(id);
+
+        //set result
+        AjaxResult result = new AjaxResult(200);
+        result.setNavTabId("");
+        return result;
+    }
+
+    /*--------------question--------------*/
+
+    @GetMapping("/admin/question")
+    public String questionIndex(Model model) {
+        List<Article> list = articleMapper.selectList(null);
+        model.addAttribute("modelItems", list);
+        return "/admin/admin_question_index.html";
+    }
+
+    @PostMapping("/admin/question")
+    public String questionIndex(Integer pageNum, Model model) {
+        List<Article    > list = articleMapper.selectList(null);
+        model.addAttribute("modelItems", list);
+        return "/admin/admin_question_index.html";
+    }
+
+    @GetMapping("/admin/question/edit")
+    public String questionEdit(Model model) {
+        Article item = new Article();
+        model.addAttribute("modelItem", item);
+        return "/admin/admin_question_edit.html";
+    }
+
+    @GetMapping("/admin/question/edit/{id}")
+    public String questionEdit(String id, Model model) {
+        Article item = articleMapper.selectById(id);
+        model.addAttribute("modelItem", item);
+        return "/admin/admin_question_edit.html";
+    }
+
+    @ResponseBody
+    @PostMapping("/admin/question/edit")
+    public AjaxResult questionEdit(Article article) {
+        article.setType(3);
+        if (StringUtils.isEmpty(article.getId())) {
+            article.setId(UUID.randomUUID().toString().replace("-", ""));
+            articleMapper.insert(article);
+        }
+        //update
+        else {
+            articleMapper.updateById(article);
+        }
+
+        //set result
+        AjaxResult result = new AjaxResult();
+        result.setStatusCode(200);
+        result.setNavTabId("");
+        result.setCallbackType("closeCurrent");
+        return result;
+    }
+
+    @PostMapping("/admin/question/delete/{id}")
+    public AjaxResult questionDelete(String id) {
+        //delete
+        articleMapper.deleteById(id);
+
+        //set result
+        AjaxResult result = new AjaxResult(200);
+        result.setNavTabId("");
+        return result;
+    }
+
 
     @GetMapping("/article/wrapper/{id}")
     public String articleWrapper(@PathVariable String id, Model model) {
