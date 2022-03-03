@@ -24,7 +24,11 @@ public class CommentMapperTest {
         entity.setQuestionId("1");
         entity.setCreateBy("by me");
         int insert = commentMapper.insert(entity);
-        // commentMapper.in
-        assertEquals(1, insert);
+
+        Comment comment = commentMapper.selectById(insert);
+        assertEquals(entity.getContent(), comment.getContent());
+
+        commentMapper.deleteById(insert);
+        assertNull(commentMapper.selectById(insert));
     }
 }

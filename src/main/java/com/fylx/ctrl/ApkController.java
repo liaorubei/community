@@ -30,9 +30,12 @@ public class ApkController {
         Result<Apk> result = new Result<>();
         try {
             Apk apk = apkMapper.selectLatest();
-            result.setCode(200);
-            result.setData(apk);
-            result.setDesc("success");
+            if (apk != null) {
+                result.setCode(200);
+                result.setData(apk);
+                result.setDesc("success");
+            }
+            throw new Exception("没有查到最新安装包");
         } catch (Exception ex) {
             result.setCode(201);
             result.setDesc(ex.getMessage());

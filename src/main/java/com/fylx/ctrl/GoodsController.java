@@ -24,7 +24,7 @@ public class GoodsController {
     @Autowired
     private GoodsMapper goodsMapper;
 
-    @ResponseBody
+    //@ResponseBody
     @GetMapping()
     public Result<List<Goods>> list() {
         Result<List<Goods>> result = new Result<List<Goods>>();
@@ -39,7 +39,7 @@ public class GoodsController {
         return result;
     }
 
-    @ResponseBody
+    //@ResponseBody
     @GetMapping("/{id}")
     public Result<Goods> getGoods(@PathVariable("id") String id) {
         Result<Goods> result = new Result<>();

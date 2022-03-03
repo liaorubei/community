@@ -1,5 +1,6 @@
 package com.fylx.mapper;
 
+import com.fylx.entity.Article;
 import com.fylx.vo.ArticleVo;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,9 +17,19 @@ public class ArticleMapperTests {
 
     @Test
     public void selectWithUserTests() {
-        String articleId = "1";
-        //ArticleVo vo = articleMapper.selectWithUserById(articleId);
-        //System.out.println(vo.getUserAvatar());
-        //Assert.assertEquals(articleId, vo.getCreateBy());
+        String articleId = "1999999999";
+        Article item = new Article();
+        item.setId(articleId);
+        item.setTitle("title");
+        item.setDescription("desc");
+        item.setContent("content");
+        articleMapper.insert(item);
+
+        Article article = articleMapper.selectById(articleId);
+        Assert.assertEquals(item.getContent(), article.getContent());
+
+        articleMapper.deleteById(articleId);
+
+        Assert.assertNull(articleMapper.selectById(articleId));
     }
 }

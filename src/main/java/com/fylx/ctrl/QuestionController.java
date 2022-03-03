@@ -1,14 +1,18 @@
 package com.fylx.ctrl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.fylx.Result;
 import com.fylx.dto.CommentDto;
+import com.fylx.entity.Article;
 import com.fylx.entity.Comment;
 import com.fylx.entity.Question;
 import com.fylx.entity.User;
+import com.fylx.mapper.ArticleMapper;
 import com.fylx.mapper.CommentMapper;
 import com.fylx.mapper.QuestionMapper;
 import com.fylx.mapper.UserMapper;
+import com.fylx.vo.ArticleVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -22,12 +26,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/questions")
+@RequestMapping("/api/questions")
 public class QuestionController {
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private ArticleMapper articleMapper;
 
     @Autowired
     private QuestionMapper questionMapper;
@@ -94,12 +102,20 @@ public class QuestionController {
 
     @ResponseBody
     @GetMapping
-    public Result<List<Question>> GetAll() {
-        Result<List<Question>> result = new Result<>();
+    public Result<List<ArticleVo>> GetAll(@RequestParam(required = false) String userId, @RequestParam(required = false) Boolean withGroups) {
+        Result<List<ArticleVo>> result = new Result<>();
         try {
             result.setCode(200);
             result.setDesc("查询成功");
-            result.setData(questionMapper.list());
+            List<Article> articles = articleMapper.selectList(new QueryWrapper<Article>().eq("type", 3));
+            List<ArticleVo> collect = articles.stream().map(a -> {
+                ArticleVo vo = new ArticleVo();
+                vo.setCreator(userMapper.selectById(a.getCreateBy()));
+                BeanUtils.copyProperties(a, vo);
+                return vo;
+            }).collect(Collectors.toList());
+
+            result.setData(collect);
         } catch (Exception ex) {
             result.setCode(201);
             result.setDesc(ex.getMessage());

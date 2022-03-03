@@ -237,7 +237,7 @@ public class AdminController {
 
     @ResponseBody
     @PostMapping("/admin/group/edit")
-    public AjaxResult groupEdit(Group group, HttpServletRequest request, @RequestParam("file1") MultipartFile file) {
+    public AjaxResult groupEdit(Group group, HttpServletRequest request) {
         MultipartHttpServletRequest k = (MultipartHttpServletRequest) request;
         if (StringUtils.isEmpty(group.getId())) {
             group.setId(UUID.randomUUID().toString().replace("-", ""));
@@ -287,6 +287,8 @@ public class AdminController {
     @GetMapping("/admin/question/edit")
     public String questionEdit(Model model) {
         Article item = new Article();
+        List<Group> groups = groupsMapper.selectList(null);
+        model.addAttribute("groups", groups);
         model.addAttribute("modelItem", item);
         return "/admin/admin_question_edit.html";
     }
@@ -294,6 +296,8 @@ public class AdminController {
     @GetMapping("/admin/question/edit/{id}")
     public String questionEdit(@PathVariable String id, Model model) {
         Article item = articleMapper.selectById(id);
+        List<Group> groups = groupsMapper.selectList(null);
+        model.addAttribute("groups", groups);
         model.addAttribute("modelItem", item);
         return "/admin/admin_question_edit.html";
     }

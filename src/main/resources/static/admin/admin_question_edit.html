@@ -1,5 +1,6 @@
 <div class="pageContent" xmlns:th="http://www.thymeleaf.org">
-    <form method="post" action="question/edit" class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone)">
+    <form method="post" action="question/edit" class="pageForm required-validate"
+          onsubmit="return validateCallback(this,dialogAjaxDone)">
         <div class="pageFormContent nowrap" layoutH="58">
             <!--nowrap-->
             <dl>
@@ -12,6 +13,15 @@
             <dl>
                 <dt>问题描述（必填）：</dt>
                 <dd><textarea name="description" class="required" cols="80" rows="5" th:text="${modelItem.description}" style="width: 110%;" alt="请填写问题描述"></textarea></dd>
+            </dl>
+            <dl>
+                <dt>所属群组（选填）：</dt>
+                <dd>
+                    <select class="combox" name="GroupId">
+                        <option selected="selected">-请选择-</option>
+                        <option th:each="group:${groups}" th:value="${group.id}" th:text="${group.title}" th:selected="${group.id==modelItem.groupId}"/>
+                    </select>
+                </dd>
             </dl>
 
 

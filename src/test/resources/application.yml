@@ -1,11 +1,15 @@
 spring:
   datasource:
-    url: jdbc:sqlite:C:\community\community.dat
-    driver-class-name: org.sqlite.JDBC
+    url: jdbc:mysql://127.0.0.1:4096/girlfriend?useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+  # url: jdbc:sqlite:C:\community\community.dat
+  # driver-class-name: org.sqlite.JDBC
 
 
 
 
 mybatis-plus:
   configuration:
-    map-underscore-to-camel-case: true
+    map-underscore-to-camel-case: false
