@@ -5,7 +5,7 @@
             <dl>
                 <dt>商品标题（必填）：</dt>
                 <dd>
-                    <input type="type" name="id" th:value="${goods.id}"/>
+                    <input type="hidden" name="id" th:value="${goods.id}"/>
                     <input type="text" name="title" th:value="${goods.title}" maxlength="50" class="required" alt="请输入商品标题" style="width: 100%;"/>
                 </dd>
             </dl>

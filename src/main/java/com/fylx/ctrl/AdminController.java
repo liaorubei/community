@@ -14,6 +14,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +32,10 @@ import java.util.UUID;
 
 @Controller
 public class AdminController {
+
+    @Value("${filepath}")
+    String root;
+
     @Autowired
     UserMapper userMapper;
 
@@ -237,15 +244,28 @@ public class AdminController {
 
     @ResponseBody
     @PostMapping("/admin/group/edit")
-    public AjaxResult groupEdit(Group group, HttpServletRequest request) {
-        MultipartHttpServletRequest k = (MultipartHttpServletRequest) request;
+    public AjaxResult groupEdit(Group group, HttpServletRequest request, @RequestParam(required = false) MultipartFile file1) throws Exception {
+        if (file1 != null && !file1.isEmpty()) {
+            String fileName = file1.getOriginalFilename();//文件名
+            String suffixName = fileName.substring(fileName.lastIndexOf("."));//后缀名
+            String path = "/images/" + UUID.randomUUID() + suffixName;
+            File dest = new File(root, path);
+            file1.transferTo(dest.toPath());
+            group.setAvatar(path);
+        }
+
         if (StringUtils.isEmpty(group.getId())) {
             group.setId(UUID.randomUUID().toString().replace("-", ""));
             groupsMapper.insert(group);
         }
         //update
         else {
-            groupsMapper.updateById(group);
+            UpdateWrapper<Group> wrapper = new UpdateWrapper<>();
+            wrapper.eq("Id", group.getId());
+            wrapper.set("Title", group.getTitle());
+            wrapper.set("Description", group.getDescription());
+            wrapper.set("Avatar", group.getAvatar());
+            groupsMapper.update(null, wrapper);
         }
 
         //set result
@@ -304,11 +324,19 @@ public class AdminController {
 
     @ResponseBody
     @PostMapping("/admin/question/edit")
-    public AjaxResult questionEdit(Article article, HttpServletRequest request) {
+    public AjaxResult questionEdit(Article article, HttpServletRequest request, @RequestParam(required = false) MultipartFile file1) throws Exception {
+        if (file1 != null && !file1.isEmpty()) {
+            String fileName = file1.getOriginalFilename();//文件名
+            String suffixName = fileName.substring(fileName.lastIndexOf("."));//后缀名
+            File dest = new File(root, "/images/" + UUID.randomUUID() + "." + suffixName);
+            file1.transferTo(dest);
+        }
+
+
         article.setType(3);
-        article.setCreateAt(sdf.format(new Date()));
         if (StringUtils.isEmpty(article.getId())) {
             article.setId(UUID.randomUUID().toString().replace("-", ""));
+            article.setCreateAt(sdf.format(new Date()));
             articleMapper.insert(article);
         }
         //update

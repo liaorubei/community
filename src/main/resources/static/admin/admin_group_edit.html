@@ -9,31 +9,40 @@
                 </dd>
             </dl>
             <dl>
-                <dt>问题描述（必填）：</dt>
+                <dt>群组描述（必填）：</dt>
                 <dd><textarea name="description" class="required" cols="80" rows="5" th:text="${modelItem.description}" style="width: 110%;" alt="请填写群组描述"></textarea></dd>
             </dl>
-<!--            <div class="upload-wrap">
-                <input type="file" name="pic[]" accept="image/*" class="valid" style="left: 0px;">
-                <div class="thumbnail">
-                    <img src="/images/img02.png" style="max-width: 80px; max-height: 80px">
-                    <a class="del-icon" href="demo/common/ajaxDone.html"></a>
-                </div>
-            </div>
-            <div class="upload-wrap">
-                <input type="file" name="file1" accept="image/*">
-            </div>-->
-<!--            <dl>
-                <dt>群组组长（选填）：</dt>
+
+            <dl>
+                <dt>群组图片（必填）：</dt>
                 <dd>
-                    <input type="text" name="leader" th:value="${modelItem.leader}" alt="请选择群组组长"/>
+                    <div class="upload-wrap">
+                        <input type="file" class="required" name="file1" accept="image/*">
+                    </div>
                 </dd>
             </dl>
-            <dl>
-                <dt>群组图片（选填）：</dt>
-                <dd>
-                    <input type="text" name="avatar" th:value="${modelItem.avatar}" alt="请输入上传群组图片" style="width: 100%;"/>
-                </dd>
-            </dl>-->
+            <!--            <div class="upload-wrap">
+                            <input type="file" name="pic[]" accept="image/*" class="valid" style="left: 0px;">
+                            <div class="thumbnail">
+                                <img src="/images/img02.png" style="max-width: 80px; max-height: 80px">
+                                <a class="del-icon" href="demo/common/ajaxDone.html"></a>
+                            </div>
+                        </div>
+                        <div class="upload-wrap">
+                            <input type="file" name="file1" accept="image/*">
+                        </div>-->
+            <!--            <dl>
+                            <dt>群组组长（选填）：</dt>
+                            <dd>
+                                <input type="text" name="leader" th:value="${modelItem.leader}" alt="请选择群组组长"/>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>群组图片（选填）：</dt>
+                            <dd>
+                                <input type="text" name="avatar" th:value="${modelItem.avatar}" alt="请输入上传群组图片" style="width: 100%;"/>
+                            </dd>
+                        </dl>-->
             <!--          <dl>
                     <dt>密码：</dt>
                     <dd>
