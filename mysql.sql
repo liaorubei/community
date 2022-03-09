@@ -106,8 +106,18 @@ create table Apk
     constraint Pk_Apk primary key (Id)
 );
 
-insert into Apk(id, createat, versioncode, versionname, path, isrelease) VALUES ('01','2020-12-12 12:12:12',1,'1','/apks/1.apk',1);
-insert into Apk(id, createat, versioncode, versionname, path, isrelease) VALUES ('02','2020-12-12 12:12:12',2,'1','/apks/1.apk',1);
-insert into Apk(id, createat, versioncode, versionname, path, isrelease) VALUES ('03','2020-12-12 12:12:12',3,'1','/apks/1.apk',1);
-insert into Apk(id, createat, versioncode, versionname, path, isrelease) VALUES ('04','2020-12-12 12:12:12',4,'1','/apks/1.apk',1);
-insert into Apk(id, createat, versioncode, versionname, path, isrelease) VALUES ('05','2020-12-12 12:12:12',5,'1','/apks/1.apk',1);
+drop table if exists Question;
+create table Question
+(
+    Id           varchar(32) not null,
+    Title        varchar(128),
+    Description  varchar(2048),
+    CreateBy     varchar(32),
+    CreateAt     DATETIME,
+    ModifyAt     DATETIME,
+    CommentCount INTEGER,
+    ViewCount    INTEGER,
+    LikeCount    INTEGER,
+    Tag          varchar(128),
+    CONSTRAINT PK_Question PRIMARY KEY (Id)
+);

@@ -1,8 +1,10 @@
 package com.fylx.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
+@TableName("User")
 public class User {
     private String id;
 

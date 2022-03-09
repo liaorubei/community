@@ -30,5 +30,4 @@ public class QuestionMapperTest {
 
         assertNull(mapper.selectById(id));
     }
-
 }

@@ -25,7 +25,7 @@ public class CommentMapperTest {
         entity.setCreateBy("by me");
         int insert = commentMapper.insert(entity);
 
-        Comment comment = commentMapper.selectById(insert);
+        Comment comment = commentMapper.selectById(entity.getId());
         assertEquals(entity.getContent(), comment.getContent());
 
         commentMapper.deleteById(insert);
